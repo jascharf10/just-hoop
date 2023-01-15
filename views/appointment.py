@@ -1,10 +1,11 @@
 import arrow
 
 from flask.views import MethodView
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
+from flask_login import current_user, login_user
 
 from database import db
-from models.appointment import Appointment, Location
+from models.appointment import Appointment, Location, User
 from forms.new_appointment import NewAppointmentForm
 
 
@@ -94,3 +95,16 @@ class AppointmentFormResource(MethodView):
 #         #     db.session.commit()
 #         #     return "New name added"
 #         return render_template('appointments/new.html', locations=all_locations)
+# class LoginResource(MethodView):
+#     def login():
+#         if current_user.is_authenticated:
+#             return redirect(url_for('index'))
+#         form = LoginForm()
+#         if form.validate_on_submit():
+#             user = User.query.filter_by(username=form.username.data).first()
+#             if user is None or not user.check_password(form.password.data):
+#                 flash('Invalid username or password')
+#                 return redirect(url_for('login'))
+#             login_user(user, remember=form.remember_me.data)
+#             return redirect(url_for('index'))
+#         return render_template('login.html', title='Sign In', form=form)

@@ -1,3 +1,3 @@
-from .appointment import Appointment, Location
+from .appointment import Appointment, Location, User
 
-__all__ = ('Appointment', 'Location')
+__all__ = ('Appointment', 'Location', 'User')
