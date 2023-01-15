@@ -2,6 +2,7 @@ import flask
 from flask_migrate import Migrate
 
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 from celery import Celery
 
@@ -67,4 +68,4 @@ class Application(object):
         self.db = SQLAlchemy(self.flask_app)
         self.migrate = Migrate()
         self.migrate.init_app(self.flask_app, self.db)
-        
+        self.login = LoginManager(self.flask_app)
