@@ -10,7 +10,7 @@ from views.appointment import (
     AppointmentFormResource,
     AppointmentResourceCreate,
     AppointmentResourceDelete,
-    AppointmentResourceIndex,
+    AppointmentResourceIndex
 )
 
 
@@ -67,3 +67,4 @@ class Application(object):
         self.db = SQLAlchemy(self.flask_app)
         self.migrate = Migrate()
         self.migrate.init_app(self.flask_app, self.db)
+        

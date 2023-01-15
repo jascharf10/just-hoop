@@ -17,9 +17,8 @@
     <thead>
       <th>Name</th>
       <th>Phone number</th>
-      <th>Appointment time</th>
-      <th>Reminder time</th>
-      <th>Timezone</th>
+      <th>Spots Trigger</th>
+      <th>Location</th>
       <th>Actions</th>
     </thead>
     <tbody>
@@ -27,9 +26,8 @@
         <tr>
           <td>{{ appointment.name }}</td>
           <td>{{ appointment.phone_number }}</td>
-          <td>{{ appointment.time }}</td>
-          <td>{{ appointment.delta }}</td>
-          <td>{{ appointment.timezone }}</td>
+          <td>{{ appointment.spots_trigger}}</td>
+          <td>{{ appointment.location }}</td>
           <td>
             <form method="POST" action="{{url_for('appointment.delete', id=appointment.id) }}">
               <button type="submit" class="btn btn-danger btn-xs">Delete</button>

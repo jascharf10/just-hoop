@@ -12,10 +12,13 @@ app = Flask(__name__, instance_relative_config=True)
 env = app.config.get("ENV", "production")
 app.config.from_object(config_classes[env])
 
+
 db.init_app(app)
 migrate.init_app(app, db)
+
 
 import tasks  # noqa E402
 import models  # noqa E402
 
 init_views(app)
+

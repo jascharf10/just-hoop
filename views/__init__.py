@@ -2,8 +2,8 @@ from views.appointment import (
     AppointmentResourceIndex,
     AppointmentResourceCreate,
     AppointmentResourceDelete,
-    AppointmentFormResource,
-)
+    AppointmentFormResource
+    )
 
 
 def init_views(app):
@@ -18,3 +18,6 @@ def init_views(app):
     app.add_url_rule(
         '/appointment/new', view_func=AppointmentFormResource.as_view('appointment.new')
     )
+    # app.add_url_rule(
+    #     '/appointment/new', view_func=LocationIndex.as_view('appointment.new')
+    # )
