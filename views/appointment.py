@@ -2,11 +2,12 @@ import arrow
 
 from flask.views import MethodView
 from flask import render_template, request, redirect, url_for, flash
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, login_required
 
 from database import db
 from models.appointment import Appointment, Location, User
 from forms.new_appointment import NewAppointmentForm
+from forms.login import LoginForm
 
 
 class AppointmentResourceDelete(MethodView):
@@ -95,6 +96,7 @@ class AppointmentFormResource(MethodView):
 #         #     db.session.commit()
 #         #     return "New name added"
 #         return render_template('appointments/new.html', locations=all_locations)
+
 # class LoginResource(MethodView):
 #     def login():
 #         if current_user.is_authenticated:
@@ -108,3 +110,15 @@ class AppointmentFormResource(MethodView):
 #             login_user(user, remember=form.remember_me.data)
 #             return redirect(url_for('index'))
 #         return render_template('login.html', title='Sign In', form=form)
+
+class LoginResource(MethodView):
+    decorators = [login_required]
+    # methods = ["GET", "POST"],
+    def login(self):
+        form = LoginForm()
+        if form.validate_on_submit():
+            flash('Login requested for user {}, remember_me={}'.format(
+                form.username.data, form.remember_me.data))
+            return redirect(url_for('appointment.index'))
+        return render_template('login.html', title='Sign In', form=form)
+

@@ -11,7 +11,8 @@ from views.appointment import (
     AppointmentFormResource,
     AppointmentResourceCreate,
     AppointmentResourceDelete,
-    AppointmentResourceIndex
+    AppointmentResourceIndex,
+    LoginResource
 )
 
 
@@ -29,6 +30,8 @@ handlers = [
         '/appointment/<int:id>/delete', 'appointment.delete', AppointmentResourceDelete
     ),
     Route('/appointment/new', 'appointment.new', AppointmentFormResource),
+    Route('/login', 'login', LoginResource),
+
 ]
 
 
@@ -68,4 +71,4 @@ class Application(object):
         self.db = SQLAlchemy(self.flask_app)
         self.migrate = Migrate()
         self.migrate.init_app(self.flask_app, self.db)
-        self.login = LoginManager(self.flask_app)
+        # self.login = LoginManager(self.flask_app)

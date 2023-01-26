@@ -2,7 +2,8 @@ from views.appointment import (
     AppointmentResourceIndex,
     AppointmentResourceCreate,
     AppointmentResourceDelete,
-    AppointmentFormResource
+    AppointmentFormResource,
+    LoginResource
     )
 
 
@@ -16,8 +17,12 @@ def init_views(app):
         view_func=AppointmentResourceDelete.as_view('appointment.delete'),
     )
     app.add_url_rule(
-        '/appointment/new', view_func=AppointmentFormResource.as_view('appointment.new')
+        '/appointment/new', view_func=AppointmentFormResource.as_view('appointment.new'),
     )
+    app.add_url_rule(
+        '/login', view_func=LoginResource.as_view('login', methods=['GET', 'POST'],
+
+    ))
     # app.add_url_rule(
     #     '/appointment/new', view_func=LocationIndex.as_view('appointment.new')
     # )
