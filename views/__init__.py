@@ -20,9 +20,9 @@ def init_views(app):
         '/appointment/new', view_func=AppointmentFormResource.as_view('appointment.new'),
     )
     app.add_url_rule(
-        '/login', view_func=LoginResource.as_view('login', methods=['GET', 'POST'],
+        '/login', view_func=LoginResource.as_view('login'),
 
-    ))
+    )
     # app.add_url_rule(
     #     '/appointment/new', view_func=LocationIndex.as_view('appointment.new')
     # )

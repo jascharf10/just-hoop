@@ -1,7 +1,7 @@
 from database import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-#from application import Application
+from reminders import login_manager
 
 import arrow
 
@@ -68,6 +68,10 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+@login_manager.user_loader
+def user_loader(user_id):
+    return User.query.get(int(user_id))
 
 # @Application.login.user_loader
 # def load_user(id):

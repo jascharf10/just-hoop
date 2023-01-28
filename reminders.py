@@ -1,13 +1,14 @@
 from flask import Flask
-from flask_login import LoginManager
 
 from config import config_classes
 from database import db, migrate
-
-from views import init_views
+from flask_login import LoginManager
 
 
 app = Flask(__name__, instance_relative_config=True)
+login_manager = LoginManager(app)
+
+from views import init_views
 
 # load the instance config, if it exists, when not testing
 env = app.config.get("ENV", "production")
@@ -16,15 +17,20 @@ app.config.from_object(config_classes[env])
 
 db.init_app(app)
 migrate.init_app(app, db)
-login_manager = LoginManager(app)
+#login_manager.init_app(app)
 
 import tasks  # noqa E402
-from models import User
+import models# @login_manager.user_loader
+
 # @login_manager.user_loader
-# def load_user(user_id): #reload user object from the user ID 
-#                         #stored in the session
-#     # since the user_id is just the primary key of our user 
-#     # table, use it in the query for the user
+# def user_loader(user_id):
 #     return User.query.get(int(user_id))
+
+# def load_user(user_id):
+#     try:
+#         return User.query.get(user_id)
+#     except:
+#         return None
 init_views(app)
+
 
