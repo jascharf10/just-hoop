@@ -3,7 +3,8 @@ from views.appointment import (
     AppointmentResourceCreate,
     AppointmentResourceDelete,
     AppointmentFormResource,
-    LoginResource
+    LoginResource,
+    UpdateServerResource
     )
 
 
@@ -21,6 +22,10 @@ def init_views(app):
     )
     app.add_url_rule(
         '/login', view_func=LoginResource.as_view('login'),
+        )
+    app.add_url_rule(
+        '/updateserver', view_func=UpdateServerResource.as_view('updateserver'),
+
 
     )
     # app.add_url_rule(

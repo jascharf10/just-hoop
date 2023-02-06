@@ -1,7 +1,7 @@
 import arrow
 
 from flask.views import View, MethodView
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, abort
 from flask_login import current_user, login_user, login_required
 
 from database import db
@@ -9,6 +9,10 @@ from models.appointment import Appointment, Location, User
 from forms.new_appointment import NewAppointmentForm
 from forms.login import LoginForm
 
+from git import Repo
+import hmac
+import hashlib
+import json
 
 class AppointmentResourceDelete(MethodView):
     def post(self, id):
@@ -145,3 +149,13 @@ class LoginResource(MethodView):
                 form.username.data, form.remember_me.data))
             return redirect(url_for('appointment.index'))
         return render_template('login.html', title='Sign In', form=form)
+
+class UpdateServerResource(MethodView):
+    def post(self):
+        repo = git.Repo('https://github.com/jascharf10/just-hoop.git')
+        origin = repo.remotes.origin
+        origin.pull()
+        return '', 200
+    
+    def get(self):
+        return '', 400

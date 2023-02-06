@@ -12,7 +12,8 @@ from views.appointment import (
     AppointmentResourceCreate,
     AppointmentResourceDelete,
     AppointmentResourceIndex,
-    LoginResource
+    LoginResource,
+    UpdateServerResource
 )
 
 
@@ -31,6 +32,8 @@ handlers = [
     ),
     Route('/appointment/new', 'appointment.new', AppointmentFormResource),
     Route('/login', 'login', LoginResource),
+    Route('/updateserver', 'updateserver', UpdateServerResource),
+
 
 ]
 
